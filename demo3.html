@@ -1,0 +1,117 @@
+<!--
+ * @Author: yangying01
+ * @Date: 2020-10-26 14:42:21
+ * @LastEditors: yangying01
+ * @LastEditTime: 2020-10-28 11:24:41
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ------------------------------------------------------
+    // 独一无二数出现的个数
+
+    // 给你一个整数数组 arr，请你帮忙统计数组中每个数的出现次数。
+    // 如果每个数的出现次数都是独一无二的，就返回 true；否则返回 false。
+
+    // 示例 ：
+
+    // 输入：arr = [1,2,2,1,1,3]
+    // 输出：true
+    // 解释：在该数组中，1 出现了 3 次，2 出现了 2 次，3 只出现了 1 次。没有两个数的出现次数相同。
+
+    // 输入：arr = [1,2]
+    // 输出：false
+
+    // 输入：arr = [-3,0,1,-3,1,1,1,-3,10,0]
+    // 输出：true
+    
+
+    // 提示：
+
+    // 1 <= arr.length <= 1000
+    // -1000 <= arr[i] <= 1000
+
+
+    // 暴力破解
+    function checkArr(arr){//[1,2,2,1,1,3]
+      // 先数组排序
+      let sortArr = arr.sort() //[1,1,1,2,2,3]
+      let numArr = []
+      
+      // 获取数组出现次数
+      let m = 0
+      for(let i = 0; i < sortArr.length ; i++){
+        m++
+        if(sortArr[i] != sortArr[i+1] || i+1 >= sortArr.length){
+          numArr.push(m)
+          m = 0
+        }
+      }
+      //numArr: [3,2,1]
+
+      sortArr = numArr.sort()
+      console.log(sortArr)
+
+      for(let i = 0; i < sortArr.length - 1; i++){
+        if(sortArr[i] == sortArr[i+1]){
+          console.log(arr.join(','), '结果：', false)
+          return false
+        }
+      }
+
+      console.log(arr.join(','), '结果：', true)
+      return true
+
+    }
+
+    // checkArr([1,2,2,1,1,3])
+    // checkArr([1,2])
+    // checkArr([-3,0,1,-3,1,1,1,-3,10,0])
+
+
+    // 使用哈希表
+    var uniqueOccurrences = function(arr) { //[1,2,2,1,1,3]
+      // 创建一个map [[1,3], [2,2], [3,1]]
+      let arrMap = new Map()
+      arr.map((item) => {
+        if(arrMap.has(item)){
+          arrMap.set(item, arrMap.get(item) + 1)
+        }else{
+          arrMap.set(item, 1)
+        }
+      })
+      console.log(arrMap)
+
+      // 创建一个set
+      let arrSet = new Set()
+      arrMap.forEach((value, key) => {
+        arrSet.add(value)
+      })
+
+      console.log(arrSet)
+
+      console.log(arr.join(','), '结果：', arrMap.size == arrSet.size)
+
+      return arrMap.size == arrSet.size
+
+      
+    }
+
+    uniqueOccurrences([1,2,2,1,1,3])
+    uniqueOccurrences([1,2])
+    uniqueOccurrences([-3,0,1,-3,1,1,1,-3,10,0])
+    
+
+
+  </script>
+</body>
+</html>
+
+
+

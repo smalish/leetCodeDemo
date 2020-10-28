@@ -1,0 +1,81 @@
+<!--
+ * @Author: yangying01
+ * @Date: 2020-10-26 14:42:21
+ * @LastEditors: yangying01
+ * @LastEditTime: 2020-10-28 11:31:16
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ------------------------------------------------------
+    // 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+
+    // 示例:
+
+    // 输入: 123
+    // 输出: 321
+
+    // 输入: -123
+    // 输出: -321
+
+    // 输入: 120
+    // 输出: 21
+
+    // 注意:假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。
+
+
+
+    // 转为字符串
+    function getReverseNum(num){
+      // 边缘情况
+      if(isNaN(num) || num >= Math.pow(2, 31)-1 || num <= -1* Math.pow(2, 31)){
+        console.log(num, '反转结果：', 0)
+        return 0
+      }
+
+      // 获取符号
+      let s = num >= 0? 1 : -1
+      let numStr = Math.abs(num).toString().split('').reverse().join('')
+
+      console.log(num, '反转结果：', s * parseInt(numStr))
+
+      return s * parseInt(numStr)
+    }
+    
+    getReverseNum(123)
+    getReverseNum(-123)
+    getReverseNum(900)
+    getReverseNum(1534236469)
+
+
+    //使用模除
+    function getReverseNum(x){
+      
+      let s = 0
+      let num = x
+      while(num != 0){
+        
+        s = s*10 + (num%10)
+        num = parseInt(num / 10)
+      }
+
+      console.log(x, '反转结果：', x == 0? 0 : s)
+      return x == 0? 0 : s
+    }
+
+    getReverseNum(123)
+    getReverseNum(-123)
+    getReverseNum(900)
+    getReverseNum(1534236469)
+    
+
+
+  </script>
+</body>
+</html>
